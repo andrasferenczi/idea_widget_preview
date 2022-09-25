@@ -19,7 +19,13 @@ include: package:lints/recommended.yaml
 #   rules:
 #     - camel_case_types
 
-# analyzer:
+analyzer:
+  exclude:
+    - lib/src/api/generated/**
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
 #   exclude:
 #     - path/to/excluded/files/**
 
