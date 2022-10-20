@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/diagnostic/diagnostic.dart';
 
 Future<T> manageCompilationUnit<T>({
   required String filePath,
@@ -18,9 +19,14 @@ Future<T> manageCompilationUnit<T>({
 
   final errors = parseResult.errors;
   if (errors.isNotEmpty) {
-    print("Errors occurred:\n");
-    for (final error in errors) {
-      print("${error.message}\n");
+    final severErrors = errors
+        .where((e) => e.severity == Severity.error)
+        .toList(growable: false);
+
+    print(
+        "Severe errors occurred while compilation (${severErrors.length} / ${errors.length})");
+    for (final error in severErrors) {
+      print(error.message);
     }
   }
 

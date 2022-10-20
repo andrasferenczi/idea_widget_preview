@@ -198,14 +198,24 @@ class ApiClient {
           return DartExtendedTypeTypeTransformer().decode(value);
         case 'Empty':
           return Empty.fromJson(value);
+        case 'FlutterPreviewReadyRequest':
+          return FlutterPreviewReadyRequest.fromJson(value);
         case 'GetClassnamesRequest':
           return GetClassnamesRequest.fromJson(value);
         case 'GetClassnamesResponse':
           return GetClassnamesResponse.fromJson(value);
+        case 'PreviewAppParams':
+          return PreviewAppParams.fromJson(value);
         case 'PreviewClassDeclaration':
           return PreviewClassDeclaration.fromJson(value);
+        case 'PreviewColors':
+          return PreviewColors.fromJson(value);
+        case 'PreviewViewState':
+          return PreviewViewState.fromJson(value);
         case 'RegisterClientRequest':
           return RegisterClientRequest.fromJson(value);
+        case 'UpdateViewStateRequest':
+          return UpdateViewStateRequest.fromJson(value);
         default:
           dynamic match;
           if (value is List && (match = _regList.firstMatch(targetType)?.group(1)) != null) {

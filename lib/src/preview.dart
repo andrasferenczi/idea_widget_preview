@@ -1,6 +1,8 @@
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
+@sealed
 class Device {
   final DeviceInfo info;
   final bool isFrameVisible;
@@ -13,8 +15,10 @@ class Device {
   });
 }
 
+@sealed
 class Preview extends StatelessWidget {
   final WidgetBuilder builder;
+  final String? title;
   final double? width;
   final double? height;
   final BoxConstraints? constraints;
@@ -23,6 +27,7 @@ class Preview extends StatelessWidget {
   const Preview({
     Key? key,
     required this.builder,
+    this.title,
     this.width,
     this.height,
     this.constraints,

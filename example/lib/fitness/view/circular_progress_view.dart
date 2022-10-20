@@ -14,6 +14,7 @@ class CircularProgressView extends StatelessWidget {
 
   final int remaining;
 
+
   CircularProgressView({
     Key? key,
     required this.total,
@@ -219,6 +220,7 @@ class CircularProgressViewPreview extends PreviewProvider {
   @override
   List<Preview> get previews => [
         Preview(
+          title: "Default look",
           builder: (context) {
             return CircularProgressView(
               current: 1600,
@@ -227,14 +229,16 @@ class CircularProgressViewPreview extends PreviewProvider {
           },
         ),
         Preview(
+          title: "Almost Full",
           builder: (context) {
             return CircularProgressView(
-              current: 2800,
+              current: 1550,
               total: 3000,
             );
           },
         ),
         Preview(
+          title: "Almost Empty",
           builder: (context) {
             return CircularProgressView(
               current: 100,
@@ -245,18 +249,23 @@ class CircularProgressViewPreview extends PreviewProvider {
       ];
 }
 
-// void main() {
-//   runApp(_PreviewApp());
-// }
-//
-// class _PreviewApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return PreviewApp(
-//       filePath: 'some/test.dart',
-//       providers: () => [
-//         CircularProgressViewPreview(),
-//       ],
-//     );
-//   }
-// }
+void main() {
+  runApp(_PreviewApp());
+}
+
+class _PreviewApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return PreviewApp.preview(
+      //language=JSON
+      paramsJson: '''{
+  "kotlin_server_port": 65210,
+  "preview_id": 2,
+  "previewed_file_path": "../fitness/view/circular_progress_view.dart"
+}''',
+      providers: () => [
+        CircularProgressViewPreview(),
+      ],
+    );
+  }
+}

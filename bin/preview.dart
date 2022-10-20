@@ -18,8 +18,9 @@ void main(List<String> arguments) async {
   print("===");
 
   //
-  final api =
-      KotlinApi(ApiClient(basePath: 'http://localhost:$pluginServerPort'));
+  final api = createKotlinApi(
+    port: pluginServerPort,
+  );
 
   final serverPort = await getUnusedPort(InternetAddress.tryParse('localhost'));
 
@@ -35,8 +36,10 @@ void main(List<String> arguments) async {
 
   try {
     await api.kotlinRegisterClientPost(
-      registerClientRequest: RegisterClientRequest(
-          port: serverPort, clientType: ClientType.analysisServer),
+      RegisterClientRequest(
+        port: serverPort,
+        clientType: ClientType.analysisServer,
+      ),
     );
   } catch (e) {
     print(e);

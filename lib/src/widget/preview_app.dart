@@ -1,50 +1,95 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:preview/src/api/generated/api.dart';
 
+import '../api/util.dart';
 import '../preview_page.dart';
 import 'simple_icon_button.dart';
 
+/// The entry point used by the generated to create the preview.
 class PreviewApp extends StatelessWidget {
   final List<PreviewPage> Function()? providers;
-
-  /// The path to the file that is being previewed
-  final String? filePath;
 
   /// Can be useful for displaying preview errors
   final Widget? child;
 
-  const PreviewApp.preview({
+  final PreviewAppParams params;
+
+  PreviewApp.preview({
     Key? key,
     required this.providers,
-    required this.filePath,
+    required String paramsJson,
   })  : child = null,
+        params = PreviewAppParams.fromJson(jsonDecode(paramsJson))!,
         super(key: key);
 
-  const PreviewApp.message({
+  PreviewApp.message({
     Key? key,
+    required String paramsJson,
     required this.child,
   })  : providers = null,
-        filePath = null,
+        params = PreviewAppParams.fromJson(jsonDecode(paramsJson))!,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final List<PreviewPage> previews = providers?.call() ?? [];
-    print('page_${filePath}_${previews.length}');
+    print('page_${params.previewedFilePath}_${previews.length}');
 
     final child = this.child;
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      debugShowMaterialGrid: false,
-      theme: ThemeData.dark(),
-      home: child != null
-          ? _MessagePreview(child: child)
-          : _TabbedPage(
-              filePath: filePath ?? '',
-              previews: previews,
-            ),
+    return _LogicWrapper(
+      params: params,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        debugShowMaterialGrid: false,
+        theme: ThemeData.dark(),
+        home: child != null
+            ? _MessagePreview(child: child)
+            : _TabbedPage(
+                filePath: params.previewedFilePath,
+                previews: previews,
+              ),
+      ),
     );
+  }
+}
+
+class _LogicWrapper extends HookWidget {
+  final PreviewAppParams params;
+  final Widget child;
+
+  const _LogicWrapper({
+    required this.params,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    useEffect(() {
+      final previewId = params.previewId;
+
+      final api = createKotlinApi(
+        port: params.kotlinServerPort,
+      );
+
+      print('Sending flutter preview ready signal $previewId');
+
+      api.kotlinFlutterPreviewReadyPost(
+        FlutterPreviewReadyRequest(
+          previewId: previewId,
+        ),
+      );
+
+      return null;
+    }, [
+      params.kotlinServerPort,
+      params.previewId,
+    ]);
+
+    return child;
   }
 }
 

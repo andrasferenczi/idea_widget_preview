@@ -33,10 +33,15 @@ part 'api/kotlin_api.dart';
 part 'model/client_type.dart';
 part 'model/dart_extended_type.dart';
 part 'model/empty.dart';
+part 'model/flutter_preview_ready_request.dart';
 part 'model/get_classnames_request.dart';
 part 'model/get_classnames_response.dart';
+part 'model/preview_app_params.dart';
 part 'model/preview_class_declaration.dart';
+part 'model/preview_colors.dart';
+part 'model/preview_view_state.dart';
 part 'model/register_client_request.dart';
+part 'model/update_view_state_request.dart';
 
 
 const _delimiters = {'csv': ',', 'ssv': ' ', 'tsv': '\t', 'pipes': '|'};

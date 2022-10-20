@@ -9,7 +9,8 @@ class ConvertToPage implements ToPreviewPage<StoryProvider> {
       previews: value.stories
           .map(
             (story) => Preview(
-              builder: story.builder,
+                title: story.name,
+                builder: story.builder,
             ),
           )
           .toList(),

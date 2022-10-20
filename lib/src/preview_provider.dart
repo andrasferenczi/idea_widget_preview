@@ -1,17 +1,14 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:preview/preview.dart';
-import 'package:preview/src/preview_page.dart';
-import 'package:preview/src/widget/resizable.dart';
+import 'package:preview/src/hook/useAnimatedValue.dart';
+import 'package:preview/src/utils.dart';
+import 'package:preview/src/widget/scaled_with_bounds.dart';
 import 'package:preview/src/widget/simple_icon_button.dart';
-
-import 'preview.dart';
 
 abstract class PreviewProvider extends StatelessWidget with PreviewPage {
   List<Preview> get previews;
-
-  double get initialScale => 1.0;
 
   PreviewProvider({Key? key}) : super(key: key);
 
@@ -19,18 +16,16 @@ abstract class PreviewProvider extends StatelessWidget with PreviewPage {
   Widget build(BuildContext context) {
     return _PreviewProviderRenderer(
       previews: previews,
-      initialScale: initialScale,
+      initialScale: 1.0,
     );
   }
 
   static PreviewProvider createAnonymous({
     Key? key,
     required List<Preview> previews,
-    double initialScale = 1.0,
   }) {
     return _AnonymousPreviewProvider(
       previews: previews,
-      initialScale: initialScale,
     );
   }
 }
@@ -38,13 +33,10 @@ abstract class PreviewProvider extends StatelessWidget with PreviewPage {
 class _AnonymousPreviewProvider extends PreviewProvider {
   @override
   final List<Preview> previews;
-  @override
-  final double initialScale;
 
   _AnonymousPreviewProvider({
     Key? key,
     required this.previews,
-    required this.initialScale,
   }) : super(key: key);
 }
 
@@ -63,29 +55,32 @@ class _PreviewProviderRenderer extends HookWidget {
   Widget build(BuildContext context) {
     final scale = useState(initialScale);
 
+    final currentScale = useAnimatedValue(
+      initialValue: initialScale,
+      targetValue: scale.value,
+    );
+
     return Stack(
       children: [
         Scrollbar(
           child: Center(
             child: SingleChildScrollView(
-              child: AnimatedScale(
-                scale: scale.value,
-                duration: Duration(milliseconds: 50),
-                alignment: Alignment.topCenter,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  // with in-between items
-                  itemCount: previews.length * 2 - 1,
-                  itemBuilder: (context, builderIndex) {
-                    if (builderIndex % 2 == 1) {
-                      return SizedBox(height: 128);
-                    }
-
-                    final index = builderIndex ~/ 2;
-                    return _Preview(child: previews[index]);
-                  },
+              child: Column(children: [
+                SizedBox(
+                  height: 32,
                 ),
-              ),
+                ...(previews
+                    .mapIndexed<Widget>(
+                      (index, preview) => _Preview(
+                        title: preview.title ?? 'Preview #$index',
+                        scale: currentScale,
+                        child: preview,
+                      ),
+                    )
+                    .addInBetween(SizedBox(height: 128))
+                    .toList()),
+                SizedBox(height: 64),
+              ]),
             ),
           ),
         ),
@@ -98,6 +93,10 @@ class _PreviewProviderRenderer extends HookWidget {
                 alignment: Alignment.topRight,
                 child: Row(
                   children: [
+                    SimpleIconButton(
+                      icon: Icons.change_circle_outlined,
+                      onClick: () => scale.value = 1.0,
+                    ),
                     SimpleIconButton(
                       icon: Icons.remove_circle_outline,
                       onClick: () => scale.value *= 0.8,
@@ -115,32 +114,44 @@ class _PreviewProviderRenderer extends HookWidget {
   }
 }
 
-class _Preview extends StatelessWidget {
-  final bool resizable;
+class _Preview extends HookWidget {
+  final double scale;
+  final String title;
   final Widget child;
 
   const _Preview({
     Key? key,
-    this.resizable = false,
+    required this.scale,
+    required this.title,
     required this.child,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (resizable) {
-      // todo: add controls
-      return ResizableWidget(child: child);
-    }
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.end,
+    return Column(
       children: [
-        SizedBox(width: 32),
-        Flexible(
-          child: child,
+        Text(
+          title,
+          style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                fontSize: 18,
+              ),
         ),
-        // todo: add controls here
+        SizedBox(
+          height: 16,
+        ),
+        ScaledWithBounds(
+          scale: scale,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Flexible(
+                child: child,
+              ),
+              // todo: add controls here
+            ],
+          ),
+        ),
       ],
     );
   }
