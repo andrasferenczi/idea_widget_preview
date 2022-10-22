@@ -16,8 +16,7 @@ class FlutterPreviewReadyRequest {
     required this.previewId,
   });
 
-  /// The same id that was passed down to the app.
-  int previewId;
+  PreviewId previewId;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is FlutterPreviewReadyRequest &&
@@ -56,7 +55,7 @@ class FlutterPreviewReadyRequest {
       }());
 
       return FlutterPreviewReadyRequest(
-        previewId: mapValueOfType<int>(json, r'preview_id')!,
+        previewId: PreviewId.fromJson(json[r'preview_id'])!,
       );
     }
     return null;

@@ -14,46 +14,61 @@ class PreviewAppParams {
   /// Returns a new [PreviewAppParams] instance.
   PreviewAppParams({
     required this.initialViewState,
-    required this.kotlinServerPort,
+    this.kotlinServerPort,
     required this.previewId,
     required this.previewedFilePath,
+    required this.theme,
   });
 
   PreviewViewState initialViewState;
 
   /// The port number where the Kotlin server is reachable. This is where the Flutter process needs to send a request to, once it is rendering.  Platform._environment is not available in Flutter, that is why this one needs to be passed down explicitly. 
-  int kotlinServerPort;
+  ///
+  /// Please note: This property should have been non-nullable! Since the specification file
+  /// does not include a default value (using the "default:" property), however, the generated
+  /// source code must fall back to having a nullable type.
+  /// Consider adding a "default:" property in the specification file to hide this note.
+  ///
+  int? kotlinServerPort;
 
-  /// An identifier for the current render.
-  int previewId;
+  PreviewId previewId;
 
   /// The file that is currently previewed
   String previewedFilePath;
+
+  PreviewTheme theme;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is PreviewAppParams &&
      other.initialViewState == initialViewState &&
      other.kotlinServerPort == kotlinServerPort &&
      other.previewId == previewId &&
-     other.previewedFilePath == previewedFilePath;
+     other.previewedFilePath == previewedFilePath &&
+     other.theme == theme;
 
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
     (initialViewState.hashCode) +
-    (kotlinServerPort.hashCode) +
+    (kotlinServerPort == null ? 0 : kotlinServerPort!.hashCode) +
     (previewId.hashCode) +
-    (previewedFilePath.hashCode);
+    (previewedFilePath.hashCode) +
+    (theme.hashCode);
 
   @override
-  String toString() => 'PreviewAppParams[initialViewState=$initialViewState, kotlinServerPort=$kotlinServerPort, previewId=$previewId, previewedFilePath=$previewedFilePath]';
+  String toString() => 'PreviewAppParams[initialViewState=$initialViewState, kotlinServerPort=$kotlinServerPort, previewId=$previewId, previewedFilePath=$previewedFilePath, theme=$theme]';
 
   Map<String, dynamic> toJson() {
     final _json = <String, dynamic>{};
       _json[r'initial_view_state'] = initialViewState;
+    if (kotlinServerPort != null) {
       _json[r'kotlin_server_port'] = kotlinServerPort;
+    } else {
+      _json[r'kotlin_server_port'] = null;
+    }
       _json[r'preview_id'] = previewId;
       _json[r'previewed_file_path'] = previewedFilePath;
+      _json[r'theme'] = theme;
     return _json;
   }
 
@@ -77,9 +92,10 @@ class PreviewAppParams {
 
       return PreviewAppParams(
         initialViewState: PreviewViewState.fromJson(json[r'initial_view_state'])!,
-        kotlinServerPort: mapValueOfType<int>(json, r'kotlin_server_port')!,
-        previewId: mapValueOfType<int>(json, r'preview_id')!,
+        kotlinServerPort: mapValueOfType<int>(json, r'kotlin_server_port'),
+        previewId: PreviewId.fromJson(json[r'preview_id'])!,
         previewedFilePath: mapValueOfType<String>(json, r'previewed_file_path')!,
+        theme: PreviewTheme.fromJson(json[r'theme'])!,
       );
     }
     return null;
@@ -130,9 +146,9 @@ class PreviewAppParams {
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
     'initial_view_state',
-    'kotlin_server_port',
     'preview_id',
     'previewed_file_path',
+    'theme',
   };
 }
 

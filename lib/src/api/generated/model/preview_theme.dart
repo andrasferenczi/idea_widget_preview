@@ -10,44 +10,44 @@
 
 part of openapi.api;
 
-class PreviewViewState {
-  /// Returns a new [PreviewViewState] instance.
-  PreviewViewState({
-    required this.zoom,
-    required this.scrollY,
+class PreviewTheme {
+  /// Returns a new [PreviewTheme] instance.
+  PreviewTheme({
+    required this.background,
+    required this.text,
   });
 
-  /// The zoom amount. 1 means no effect.
-  double zoom;
+  /// Hexadecimal representation of the color
+  String background;
 
-  /// The scroll offset in the y direction
-  double scrollY;
+  /// Hexadecimal representation of the color
+  String text;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is PreviewViewState &&
-     other.zoom == zoom &&
-     other.scrollY == scrollY;
+  bool operator ==(Object other) => identical(this, other) || other is PreviewTheme &&
+     other.background == background &&
+     other.text == text;
 
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
-    (zoom.hashCode) +
-    (scrollY.hashCode);
+    (background.hashCode) +
+    (text.hashCode);
 
   @override
-  String toString() => 'PreviewViewState[zoom=$zoom, scrollY=$scrollY]';
+  String toString() => 'PreviewTheme[background=$background, text=$text]';
 
   Map<String, dynamic> toJson() {
     final _json = <String, dynamic>{};
-      _json[r'zoom'] = zoom;
-      _json[r'scroll_y'] = scrollY;
+      _json[r'background'] = background;
+      _json[r'text'] = text;
     return _json;
   }
 
-  /// Returns a new [PreviewViewState] instance and imports its values from
+  /// Returns a new [PreviewTheme] instance and imports its values from
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
-  static PreviewViewState? fromJson(dynamic value) {
+  static PreviewTheme? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
 
@@ -56,25 +56,25 @@ class PreviewViewState {
       // Note 2: this code is stripped in release mode!
       assert(() {
         requiredKeys.forEach((key) {
-          assert(json.containsKey(key), 'Required key "PreviewViewState[$key]" is missing from JSON.');
-          assert(json[key] != null, 'Required key "PreviewViewState[$key]" has a null value in JSON.');
+          assert(json.containsKey(key), 'Required key "PreviewTheme[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "PreviewTheme[$key]" has a null value in JSON.');
         });
         return true;
       }());
 
-      return PreviewViewState(
-        zoom: mapValueOfType<double>(json, r'zoom')!,
-        scrollY: mapValueOfType<double>(json, r'scroll_y')!,
+      return PreviewTheme(
+        background: mapValueOfType<String>(json, r'background')!,
+        text: mapValueOfType<String>(json, r'text')!,
       );
     }
     return null;
   }
 
-  static List<PreviewViewState>? listFromJson(dynamic json, {bool growable = false,}) {
-    final result = <PreviewViewState>[];
+  static List<PreviewTheme>? listFromJson(dynamic json, {bool growable = false,}) {
+    final result = <PreviewTheme>[];
     if (json is List && json.isNotEmpty) {
       for (final row in json) {
-        final value = PreviewViewState.fromJson(row);
+        final value = PreviewTheme.fromJson(row);
         if (value != null) {
           result.add(value);
         }
@@ -83,12 +83,12 @@ class PreviewViewState {
     return result.toList(growable: growable);
   }
 
-  static Map<String, PreviewViewState> mapFromJson(dynamic json) {
-    final map = <String, PreviewViewState>{};
+  static Map<String, PreviewTheme> mapFromJson(dynamic json) {
+    final map = <String, PreviewTheme>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
       for (final entry in json.entries) {
-        final value = PreviewViewState.fromJson(entry.value);
+        final value = PreviewTheme.fromJson(entry.value);
         if (value != null) {
           map[entry.key] = value;
         }
@@ -97,13 +97,13 @@ class PreviewViewState {
     return map;
   }
 
-  // maps a json object with a list of PreviewViewState-objects as value to a dart map
-  static Map<String, List<PreviewViewState>> mapListFromJson(dynamic json, {bool growable = false,}) {
-    final map = <String, List<PreviewViewState>>{};
+  // maps a json object with a list of PreviewTheme-objects as value to a dart map
+  static Map<String, List<PreviewTheme>> mapListFromJson(dynamic json, {bool growable = false,}) {
+    final map = <String, List<PreviewTheme>>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
       for (final entry in json.entries) {
-        final value = PreviewViewState.listFromJson(entry.value, growable: growable,);
+        final value = PreviewTheme.listFromJson(entry.value, growable: growable,);
         if (value != null) {
           map[entry.key] = value;
         }
@@ -114,8 +114,8 @@ class PreviewViewState {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
-    'zoom',
-    'scroll_y',
+    'background',
+    'text',
   };
 }
 

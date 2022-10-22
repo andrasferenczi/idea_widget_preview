@@ -1,13 +1,15 @@
 import 'package:preview/preview.dart';
 import 'package:preview/src/example/my_custom_preview.dart';
 
-class CreateMyCustomPreview extends ToPreviewPage<MyCustomPreview> {
+class CreateMyCustomPreview extends ToPreviewProvider<MyCustomPreview> {
   @override
-  PreviewPage toPreviewPage(MyCustomPreview value) {
-    return PreviewPage.createAnonymous(
-      builder: (context) {
-        return value.build(context);
-      },
+  PreviewProvider toPreviewProvider(MyCustomPreview value) {
+    return PreviewProvider.createAnonymous(
+      previews: [
+        Preview(builder: (context) {
+          return value;
+        }),
+      ],
     );
   }
 }

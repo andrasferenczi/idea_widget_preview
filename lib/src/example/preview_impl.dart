@@ -14,15 +14,24 @@ class _PreviewApp extends StatelessWidget {
     return PreviewApp.preview(
       //language=JSON
       paramsJson: '''{
-  "kotlin_server_port": 65210,
-  "preview_id": 2,
-  "previewed_file_path": "../fitness/view/circular_progress_view.dart"
+  "initial_view_state": {
+      "zoom": 0.4,
+      "scroll_y": 10.0
+   },
+  "kotlin_server_port": null,
+  "preview_id": {
+    "value":  2
+  },
+  "previewed_file_path": "../fitness/view/circular_progress_view.dart",
+  "theme": {
+    "background": "#121524",
+    "text": "#ddccdd"
+  }
 }''',
       providers: () => [
-        _Multiple(),
         _DemoProvider(),
-        _LongTextProvider(),
-        CreateMyCustomPreview().toPreviewPage(CustomComponentPreview()),
+        _Multiple(),
+        CreateMyCustomPreview().toPreviewProvider(CustomComponentPreview()),
       ],
     );
   }
@@ -46,24 +55,26 @@ class MyComponent extends StatelessWidget {
 // ===
 
 /// Implementations should not be private, but this is just an example
-class _DemoProvider extends StatelessWidget with PreviewPage {
+class _DemoProvider extends PreviewProvider {
   @override
   Widget build(BuildContext context) {
     return MyComponent(text: "Demo");
   }
-}
 
-class _LongTextProvider extends StatelessWidget with PreviewPage {
   @override
-  Widget build(BuildContext context) {
-    return MyComponent(text: "Some longer text here to see the preview");
-  }
+  String get name => "Demo";
+
+  @override
+  List<Preview> get previews => [
+        Preview(
+          builder: (context) => MyComponent(text: "Demo title"),
+        ),
+      ];
 }
 
 class _Multiple extends PreviewProvider {
-
   @override
-  String? get title => "Multiple Items";
+  String get name => "Multiple Items";
 
   @override
   List<Preview> get previews => [
@@ -73,8 +84,9 @@ class _Multiple extends PreviewProvider {
         Preview(
           title: 'Longer text',
           width: 100,
-          builder: (context) => MyComponent(text:
-              "Second is somewhat longer than the first one, so it can be seen better."),
+          builder: (context) => MyComponent(
+              text:
+                  "Second is somewhat longer than the first one, so it can be seen better."),
         ),
         Preview(
             device: Device(

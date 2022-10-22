@@ -215,7 +215,6 @@ class _CurvePainter extends CustomPainter {
 }
 
 class CircularProgressViewPreview extends PreviewProvider {
-  CircularProgressViewPreview({Key? key}) : super(key: key);
 
   @override
   List<Preview> get previews => [

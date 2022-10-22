@@ -26,6 +26,7 @@ class ScaledWithBounds extends HookWidget {
           // ),
           height: height,
         ),
+        // Resizing the space taken up just cannot be solved easily.
         MeasureSize(
           onChange: (Size measuredSize) {
             if (size.value != measuredSize) {

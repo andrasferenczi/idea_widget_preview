@@ -169,7 +169,6 @@ class MealsView extends StatelessWidget {
 }
 
 class MealsListViewPreview extends PreviewProvider {
-  MealsListViewPreview({Key? key}) : super(key: key);
 
   @override
   List<Preview> get previews => MealsListData.tabIconsList

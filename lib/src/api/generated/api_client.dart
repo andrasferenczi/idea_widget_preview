@@ -208,8 +208,10 @@ class ApiClient {
           return PreviewAppParams.fromJson(value);
         case 'PreviewClassDeclaration':
           return PreviewClassDeclaration.fromJson(value);
-        case 'PreviewColors':
-          return PreviewColors.fromJson(value);
+        case 'PreviewId':
+          return PreviewId.fromJson(value);
+        case 'PreviewTheme':
+          return PreviewTheme.fromJson(value);
         case 'PreviewViewState':
           return PreviewViewState.fromJson(value);
         case 'RegisterClientRequest':

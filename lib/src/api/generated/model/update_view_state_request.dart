@@ -17,8 +17,7 @@ class UpdateViewStateRequest {
     required this.previewViewState,
   });
 
-  /// The same id that was passed down to the app.
-  int previewId;
+  PreviewId previewId;
 
   PreviewViewState previewViewState;
 
@@ -62,7 +61,7 @@ class UpdateViewStateRequest {
       }());
 
       return UpdateViewStateRequest(
-        previewId: mapValueOfType<int>(json, r'preview_id')!,
+        previewId: PreviewId.fromJson(json[r'preview_id'])!,
         previewViewState: PreviewViewState.fromJson(json[r'preview_view_state'])!,
       );
     }

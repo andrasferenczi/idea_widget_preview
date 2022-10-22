@@ -2,9 +2,9 @@ import 'package:preview/preview.dart';
 
 import 'story_provider.dart';
 
-class ConvertToPage implements ToPreviewPage<StoryProvider> {
+class ConvertToPreviews implements ToPreviewProvider<StoryProvider> {
   @override
-  PreviewPage toPreviewPage(StoryProvider value) {
+  PreviewProvider toPreviewProvider(StoryProvider value) {
     return PreviewProvider.createAnonymous(
       previews: value.stories
           .map(

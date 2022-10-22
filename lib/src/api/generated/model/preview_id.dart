@@ -10,44 +10,37 @@
 
 part of openapi.api;
 
-class PreviewColors {
-  /// Returns a new [PreviewColors] instance.
-  PreviewColors({
-    required this.background,
-    required this.text,
+class PreviewId {
+  /// Returns a new [PreviewId] instance.
+  PreviewId({
+    required this.value,
   });
 
-  /// Hexadecimal representation of the color
-  String background;
-
-  /// Hexadecimal representation of the color
-  String text;
+  /// The wrapped value.
+  int value;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is PreviewColors &&
-     other.background == background &&
-     other.text == text;
+  bool operator ==(Object other) => identical(this, other) || other is PreviewId &&
+     other.value == value;
 
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
-    (background.hashCode) +
-    (text.hashCode);
+    (value.hashCode);
 
   @override
-  String toString() => 'PreviewColors[background=$background, text=$text]';
+  String toString() => 'PreviewId[value=$value]';
 
   Map<String, dynamic> toJson() {
     final _json = <String, dynamic>{};
-      _json[r'background'] = background;
-      _json[r'text'] = text;
+      _json[r'value'] = value;
     return _json;
   }
 
-  /// Returns a new [PreviewColors] instance and imports its values from
+  /// Returns a new [PreviewId] instance and imports its values from
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
-  static PreviewColors? fromJson(dynamic value) {
+  static PreviewId? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
 
@@ -56,25 +49,24 @@ class PreviewColors {
       // Note 2: this code is stripped in release mode!
       assert(() {
         requiredKeys.forEach((key) {
-          assert(json.containsKey(key), 'Required key "PreviewColors[$key]" is missing from JSON.');
-          assert(json[key] != null, 'Required key "PreviewColors[$key]" has a null value in JSON.');
+          assert(json.containsKey(key), 'Required key "PreviewId[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "PreviewId[$key]" has a null value in JSON.');
         });
         return true;
       }());
 
-      return PreviewColors(
-        background: mapValueOfType<String>(json, r'background')!,
-        text: mapValueOfType<String>(json, r'text')!,
+      return PreviewId(
+        value: mapValueOfType<int>(json, r'value')!,
       );
     }
     return null;
   }
 
-  static List<PreviewColors>? listFromJson(dynamic json, {bool growable = false,}) {
-    final result = <PreviewColors>[];
+  static List<PreviewId>? listFromJson(dynamic json, {bool growable = false,}) {
+    final result = <PreviewId>[];
     if (json is List && json.isNotEmpty) {
       for (final row in json) {
-        final value = PreviewColors.fromJson(row);
+        final value = PreviewId.fromJson(row);
         if (value != null) {
           result.add(value);
         }
@@ -83,12 +75,12 @@ class PreviewColors {
     return result.toList(growable: growable);
   }
 
-  static Map<String, PreviewColors> mapFromJson(dynamic json) {
-    final map = <String, PreviewColors>{};
+  static Map<String, PreviewId> mapFromJson(dynamic json) {
+    final map = <String, PreviewId>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
       for (final entry in json.entries) {
-        final value = PreviewColors.fromJson(entry.value);
+        final value = PreviewId.fromJson(entry.value);
         if (value != null) {
           map[entry.key] = value;
         }
@@ -97,13 +89,13 @@ class PreviewColors {
     return map;
   }
 
-  // maps a json object with a list of PreviewColors-objects as value to a dart map
-  static Map<String, List<PreviewColors>> mapListFromJson(dynamic json, {bool growable = false,}) {
-    final map = <String, List<PreviewColors>>{};
+  // maps a json object with a list of PreviewId-objects as value to a dart map
+  static Map<String, List<PreviewId>> mapListFromJson(dynamic json, {bool growable = false,}) {
+    final map = <String, List<PreviewId>>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
       for (final entry in json.entries) {
-        final value = PreviewColors.listFromJson(entry.value, growable: growable,);
+        final value = PreviewId.listFromJson(entry.value, growable: growable,);
         if (value != null) {
           map[entry.key] = value;
         }
@@ -114,8 +106,7 @@ class PreviewColors {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
-    'background',
-    'text',
+    'value',
   };
 }
 
