@@ -1,28 +1,4 @@
-import 'dart:io';
-import 'dart:ui';
-
-Future<int> getUnusedPort(InternetAddress? address) {
-  return ServerSocket.bind(address ?? InternetAddress.anyIPv4, 0)
-      .then((socket) {
-    var port = socket.port;
-    socket.close();
-    return port;
-  });
-}
-
-extension IterableExtension<T> on Iterable<T> {
-  Iterable<T> addInBetween(T item) sync* {
-    if (length <= 1) {
-      yield* this;
-      return;
-    }
-    for (final widget in take(length - 1)) {
-      yield widget;
-      yield item;
-    }
-    yield last;
-  }
-}
+import 'package:flutter/material.dart';
 
 /// https://stackoverflow.com/a/50081214/4420543
 extension HexColor on Color {

@@ -16,7 +16,7 @@ packages:
     source: hosted
     version: "4.7.0"
   args:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: args
       url: "https://pub.dartlang.org"
@@ -195,13 +195,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.6.0"
-  json_rpc_2:
-    dependency: "direct main"
-    description:
-      name: json_rpc_2
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.2"
   lints:
     dependency: "direct dev"
     description:
@@ -238,7 +231,7 @@ packages:
     source: hosted
     version: "1.7.0"
   mime:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: mime
       url: "https://pub.dartlang.org"
@@ -348,7 +341,7 @@ packages:
     source: hosted
     version: "1.10.0"
   stream_channel:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: stream_channel
       url: "https://pub.dartlang.org"
@@ -404,7 +397,7 @@ packages:
     source: hosted
     version: "2.1.2"
   vm_service:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: vm_service
       url: "https://pub.dartlang.org"
@@ -418,7 +411,7 @@ packages:
     source: hosted
     version: "1.0.1"
   web_socket_channel:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: web_socket_channel
       url: "https://pub.dartlang.org"

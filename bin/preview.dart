@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:preview/src/analysis/get_classnames.dart';
-import 'package:preview/src/api/generated/api.dart';
-import 'package:preview/src/api/server/preview_dart_server.dart';
-import 'package:preview/src/api/util.dart';
-import 'package:preview/src/utils.dart';
+import 'package:idea_widget_preview/src/analysis/get_classnames.dart';
+import 'package:idea_widget_preview/src/api/generated/api.dart';
+import 'package:idea_widget_preview/src/api/server/preview_dart_server.dart';
+import 'package:idea_widget_preview/src/api/util.dart';
+import 'package:idea_widget_preview/src/util/methods.dart';
 
 /// Start with: (executed in the example)
 /// (set preview.plugin.port=1234 && set preview.client.type=analysis_server && flutter pub run preview:preview)

@@ -1,8 +1,11 @@
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
-import 'package:preview/preview.dart';
-import 'package:preview/src/example/my_custom_preview.dart';
-import 'package:preview/src/example/transformer.dart';
+
+import '../preview.dart';
+import '../preview_provider.dart';
+import '../widget/preview_app.dart';
+import 'my_custom_preview.dart';
+import 'transformer.dart';
 
 void main() {
   runApp(_PreviewApp());

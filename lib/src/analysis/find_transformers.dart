@@ -45,7 +45,7 @@ class _GenericExtractVisitor extends RecursiveAstVisitor<dynamic> {
   });
 
   String? _getGenericMappedPreviewType(NamedType namedType) {
-    if (namedType.name.toString() != 'ToPreviewPage') {
+    if (namedType.name.toString() != 'ToPreviewProvider') {
       return null;
     }
 

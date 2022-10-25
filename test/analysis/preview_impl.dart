@@ -1,5 +1,5 @@
-import 'package:preview/src/analysis/get_classnames.dart';
-import 'package:preview/src/api/generated/api.dart';
+import 'package:idea_widget_preview/src/analysis/get_classnames.dart';
+import 'package:idea_widget_preview/src/api/generated/api.dart';
 import 'package:test/test.dart';
 
 void main() {

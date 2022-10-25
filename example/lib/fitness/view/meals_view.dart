@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:preview/preview.dart';
+import 'package:idea_widget_preview/root.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 import '../../common/story_provider.dart';

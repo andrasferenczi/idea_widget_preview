@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:preview/src/api/generated/api.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'package:shelf_router/shelf_router.dart';
+
+import '../generated/api.dart';
 
 void startServer({
   required int port,

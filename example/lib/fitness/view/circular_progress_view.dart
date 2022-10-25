@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:preview/preview.dart';
+import 'package:idea_widget_preview/root.dart';
 
 import '../util/fitness_app_theme.dart';
 import '../util/hex_color.dart';
@@ -13,7 +13,6 @@ class CircularProgressView extends StatelessWidget {
   final int current;
 
   final int remaining;
-
 
   CircularProgressView({
     Key? key,

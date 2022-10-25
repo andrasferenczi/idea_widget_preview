@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
-import 'package:preview/src/analysis/find_classes.dart';
-import 'package:preview/src/analysis/find_transformers.dart';
-import 'package:preview/src/analysis/manage_compilation_unit.dart';
 
 import '../api/generated/api.dart';
+import 'find_classes.dart';
+import 'find_transformers.dart';
+import 'manage_compilation_unit.dart';
 
 Future<GetClassnamesResponse> getClassnames(
   GetClassnamesRequest request,
@@ -13,7 +13,7 @@ Future<GetClassnamesResponse> getClassnames(
       transformers.entries.map((e) => e.classnameOfTransformedType);
 
   final builtInExtends = ['PreviewProvider'];
-  final builtInMixins = ['PreviewPage'];
+  final builtInMixins = <String>[];
 
   final classes = await manageCompilationUnit(
     filePath: request.previewedFilePath,

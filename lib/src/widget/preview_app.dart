@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:preview/src/api/generated/api.dart';
-import 'package:preview/src/preview_provider.dart';
 
+import '../api/generated/api.dart';
 import '../api/util.dart';
-import '../utils.dart';
+import '../preview_provider.dart';
+import '../util/ext/hex_color.dart';
 
 /// The entry point used by the generated to create the preview.
 class PreviewApp extends StatelessWidget {

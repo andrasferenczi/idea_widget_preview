@@ -1,15 +1,16 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:preview/preview.dart';
-import 'package:preview/src/hook/useAnimatedValue.dart';
-import 'package:preview/src/hook/useDebounce.dart';
-import 'package:preview/src/utils.dart';
-import 'package:preview/src/widget/preview_app.dart';
-import 'package:preview/src/widget/scaled_with_bounds.dart';
-import 'package:preview/src/widget/simple_icon_button.dart';
+import 'package:idea_widget_preview/src/util/ext/iterable_extension.dart';
 
 import 'api/generated/api.dart';
+import 'hook/useAnimatedValue.dart';
+import 'hook/useDebounce.dart';
+import 'preview.dart';
+import 'util/ext/hex_color.dart';
+import 'widget/preview_app.dart';
+import 'widget/scaled_with_bounds.dart';
+import 'widget/simple_icon_button.dart';
 
 abstract class PreviewProvider {
   String? get name => null;

@@ -30,7 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  preview:
+  idea_widget_preview:
     path: ../
 
   # imported to showcase the mapper
