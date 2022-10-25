@@ -175,28 +175,31 @@ class _PreviewProviderRenderer extends HookWidget {
         ),
         Positioned(
           top: 0,
-          right: 16,
+          right: 8,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            // watch out for IDEA controls there
+            padding: const EdgeInsets.only(top: 32),
             child: Align(
-                alignment: Alignment.topRight,
-                child: Row(
+                alignment: Alignment.topLeft,
+                child: Column(
                   children: [
                     SimpleIconButton(
                       color: iconColor,
                       icon: Icons.change_circle_outlined,
                       onClick: () => updateScale((it) => 1.0),
                     ),
+                    SizedBox(height: 4),
+                    SimpleIconButton(
+                      color: iconColor,
+                      icon: Icons.add_circle_outline,
+                      onClick: () => updateScale((it) => it * 1.2),
+                    ),
+                    SizedBox(height: 4),
                     SimpleIconButton(
                       color: iconColor,
                       icon: Icons.remove_circle_outline,
                       onClick: () => updateScale((it) => it * 0.8),
                     ),
-                    SimpleIconButton(
-                      color: iconColor,
-                      icon: Icons.add_circle_outline,
-                      onClick: () => updateScale((it) => it * 1.2),
-                    )
                   ],
                 )),
           ),

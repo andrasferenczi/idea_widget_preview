@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:idea_widget_preview/root.dart';
+import 'package:idea_widget_preview/preview.dart';
 
 import '../util/fitness_app_theme.dart';
 import '../util/hex_color.dart';

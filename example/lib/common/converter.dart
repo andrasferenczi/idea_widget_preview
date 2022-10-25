@@ -1,4 +1,4 @@
-import 'package:idea_widget_preview/root.dart';
+import 'package:idea_widget_preview/preview.dart';
 
 import 'story_provider.dart';
 

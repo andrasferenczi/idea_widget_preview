@@ -80,7 +80,7 @@ class _LogicWrapper extends HookWidget {
     final previewId = params.previewId;
 
     useEffect(() {
-      print('Read to send: flutter preview ready signal $previewId');
+      print('Ready to send: flutter preview ready signal $previewId');
 
       api?.kotlinFlutterPreviewReadyPost(
         FlutterPreviewReadyRequest(
