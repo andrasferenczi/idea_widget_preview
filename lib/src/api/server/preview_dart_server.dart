@@ -1,12 +1,13 @@
 import 'dart:convert';
 
+import 'package:idea_widget_preview/src/util/disposable.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'package:shelf_router/shelf_router.dart';
 
 import '../generated/api.dart';
 
-void startServer({
+Future<Disposable> startServer({
   required int port,
   required Future<GetClassnamesResponse> Function(GetClassnamesRequest request)
       getClassNames,
@@ -40,4 +41,9 @@ void startServer({
   var server = await shelf_io.serve(handler, 'localhost', port);
 
   print('Serving at http://${server.address.host}:${server.port}');
+
+  return Disposable.create(() {
+    // because server itself cannot be returned (type not exported)
+    server.close(force: true);
+  });
 }

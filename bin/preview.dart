@@ -27,7 +27,7 @@ void main(List<String> arguments) async {
   // note: knowledge-base: public function in Dart seems
   //  to return a private class that is not exported.
   //  So cannot declare a variable with its type.
-  startServer(
+  final server = await startServer(
     port: serverPort,
     getClassNames: (request) async {
       return await getClassnames(request);
@@ -44,4 +44,13 @@ void main(List<String> arguments) async {
   } catch (e) {
     print(e);
   }
+
+  // this one should be the last call, because it is blocking
+  ProcessSignal.sigint.watch().listen((_) async {
+    print('onClose');
+    // using without explicitly declaring the type of server,
+    // because it is not exported
+    server.dispose();
+    exit(0);
+  });
 }
