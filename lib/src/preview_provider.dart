@@ -167,7 +167,7 @@ class _PreviewProviderRenderer extends HookWidget {
                 SizedBox(
                   height: 32,
                 ),
-                ...(previews.addInBetween(SizedBox(height: 128)).toList()),
+                ...(previews.addInBetween(SizedBox(height: 32)).toList()),
                 SizedBox(height: 64),
               ]),
             ),
@@ -241,7 +241,7 @@ class _Preview extends HookWidget {
               Text(
                 groupName,
                 style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                      fontSize: 12,
+                      fontSize: 8,
                       color: textColor,
                     ),
                 textAlign: TextAlign.left,
@@ -249,7 +249,7 @@ class _Preview extends HookWidget {
             Text(
               title,
               style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                    fontSize: 20,
+                    fontSize: 12,
                     color: textColor,
                   ),
               textAlign: TextAlign.left,
@@ -259,7 +259,7 @@ class _Preview extends HookWidget {
                 subText,
                 style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       fontWeight: FontWeight.bold,
-                      fontSize: 10,
+                      fontSize: 7,
                       color: textColor,
                     ),
                 textAlign: TextAlign.left,
@@ -267,7 +267,7 @@ class _Preview extends HookWidget {
           ],
         ),
         SizedBox(
-          height: 16,
+          height: 12,
         ),
         ScaledWithBounds(
           scale: scale,
