@@ -142,7 +142,7 @@ class MealsViewStory implements StoryProvider {
 
 ## Plugin ui
 
-![IDEA](./docs/plugin/images/idea_features.png)
+![IDEA](plugin/images/idea_features.png)
 
 1) Refresh: This button reloads the current preview.
 2) This is the preview panel you can open in any `.dart` file. The content is context-dependent and in case of errors, or missing implementation, you will see a message instead of the preview.

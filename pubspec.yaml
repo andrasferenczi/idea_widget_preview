@@ -1,12 +1,11 @@
 name: idea_widget_preview
 description: Widget Preview in IDEA-based development environments.
-version: 1.0.0
-# homepage: https://www.example.com
+version: 0.0.1
+homepage: https://github.com/andrasferenczi/idea_widget_preview
 
 environment:
   sdk: '>=2.17.6 <3.0.0'
 
-#   path has to be compatible with 1.8.1, because flutter_test depends on 1.8.1
 dependencies:
   analyzer: ^4.6.0
   async: ^2.3.0
