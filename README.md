@@ -16,6 +16,8 @@ https://user-images.githubusercontent.com/17592224/198992173-ff00ec49-47bc-478f-
 
 (Widgets used in the demo were retrieved from [here](https://github.com/mitesh77/Best-Flutter-UI-Templates).)
 
+# Table Of Contents
+
 <!-- TOC -->
 * [About](#about)
   * [General](#general)
@@ -140,9 +142,7 @@ class MealsViewStory implements StoryProvider {
 
 ## Plugin ui
 
-<div align="center">
-  <img width="640px" src="https://github.com/andrasferenczi/idea_widget_preview/docs/plugin/images/idea_features.png?raw=true" />
-</div>
+![IDEA](./docs/plugin/images/idea_****features.png)
 
 1) Refresh: This button reloads the current preview
 2) This is the preview panel you can open in any .dart file. The content is context-dependent and in case of errors, or missing implementation, you will see a different message.
