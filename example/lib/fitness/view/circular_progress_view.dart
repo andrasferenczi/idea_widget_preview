@@ -246,24 +246,3 @@ class CircularProgressViewPreview extends PreviewProvider {
         ),
       ];
 }
-
-void main() {
-  runApp(_PreviewApp());
-}
-
-class _PreviewApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return PreviewApp.preview(
-      //language=JSON
-      paramsJson: '''{
-  "kotlin_server_port": 65210,
-  "preview_id": 2,
-  "previewed_file_path": "../fitness/view/circular_progress_view.dart"
-}''',
-      providers: () => [
-        CircularProgressViewPreview(),
-      ],
-    );
-  }
-}
