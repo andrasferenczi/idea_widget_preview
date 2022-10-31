@@ -259,19 +259,3 @@ class MealsViewStory extends StatelessWidget implements StoryProvider {
         stories: stories,
       );
 }
-
-// void main() {
-//   runApp(_PreviewApp());
-// }
-//
-// class _PreviewApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return PreviewApp(
-//       filePath: 'some/test.dart',
-//       providers: () => [
-//         MealsListViewPreview(),
-//       ],
-//     );
-//   }
-// }

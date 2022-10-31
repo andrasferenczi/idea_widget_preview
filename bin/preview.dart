@@ -6,8 +6,6 @@ import 'package:idea_widget_preview/src/api/server/preview_dart_server.dart';
 import 'package:idea_widget_preview/src/api/util.dart';
 import 'package:idea_widget_preview/src/util/methods.dart';
 
-/// Start with: (executed in the example)
-/// (set preview.plugin.port=1234 && set preview.client.type=analysis_server && flutter pub run preview:preview)
 void main(List<String> arguments) async {
   final pluginServerPort = getPluginServerPort();
   final clientType = getClientType();
@@ -24,8 +22,8 @@ void main(List<String> arguments) async {
 
   final serverPort = await getUnusedPort(InternetAddress.tryParse('localhost'));
 
-  // note: knowledge-base: public function in Dart seems
-  //  to return a private class that is not exported.
+  //  Public function in Dart seems to return a private class
+  //  that is not exported.
   //  So cannot declare a variable with its type.
   final server = await startServer(
     port: serverPort,

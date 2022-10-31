@@ -144,8 +144,8 @@ class MealsViewStory implements StoryProvider {
 
 ![IDEA](./docs/plugin/images/idea_features.png)
 
-1) Refresh: This button reloads the current preview
-2) This is the preview panel you can open in any .dart file. The content is context-dependent and in case of errors, or missing implementation, you will see a different message.
+1) Refresh: This button reloads the current preview.
+2) This is the preview panel you can open in any `.dart` file. The content is context-dependent and in case of errors, or missing implementation, you will see a message instead of the preview.
 3) Additional logs view of the running processes. If your project contains errors, the preview cannot be rendered. These 2 readonly console views provides further info about issues. (Ideally, IDEA and the Dart plugin will highlight the issues in your project anyway.)
 
 

@@ -19,13 +19,13 @@ Future<T> manageCompilationUnit<T>({
 
   final errors = parseResult.errors;
   if (errors.isNotEmpty) {
-    final severErrors = errors
+    final severeErrors = errors
         .where((e) => e.severity == Severity.error)
         .toList(growable: false);
 
     print(
-        "Severe errors occurred while compilation (${severErrors.length} / ${errors.length})");
-    for (final error in severErrors) {
+        "Severe errors occurred while compilation (${severeErrors.length} / ${errors.length})");
+    for (final error in severeErrors) {
       print(error.message);
     }
   }

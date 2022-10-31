@@ -285,7 +285,6 @@ class _Preview extends HookWidget {
                   child: child,
                 ),
               ),
-              // todo: add controls here
             ],
           ),
         ),
