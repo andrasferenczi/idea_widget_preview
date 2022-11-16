@@ -6,7 +6,7 @@ The aim of this plugin (pub package and IDE plugin) is to assist Flutter develop
 
 This repository contains:
 - the open source code of the publicly available `idea_widget_preview` pub package
-- usage documentation and required legal information for the closed-source `Widget Preview for Flutter` plugin.
+- usage documentation and required legal information for the [closed-source `Widget Preview for Flutter` plugin](https://plugins.jetbrains.com/plugin/20292-widget-preview-for-flutter).
 
 ## Demo
 
@@ -39,7 +39,7 @@ https://user-images.githubusercontent.com/17592224/198992173-ff00ec49-47bc-478f-
 - [Install Flutter](https://docs.flutter.dev/get-started/install) on your machine
   - Add `flutter` tool to your path (preferred)
 - Add `idea_widget_preview` pub package to your project
-- Install `Widget Preview for Flutter` plugin in your Jetbrains IDE
+- [Install `Widget Preview for Flutter` plugin](https://plugins.jetbrains.com/plugin/20292-widget-preview-for-flutter) in your Jetbrains IDE
 
 Recommended:
 - Add `lib/widget.preview.dart` to your `.gitignore`
