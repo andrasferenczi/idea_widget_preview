@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:idea_widget_preview/src/util/ext/iterable_extension.dart';
+import 'package:idea_widget_preview/src/widget/scale_controller.dart';
 
 import 'api/generated/api.dart';
 import 'hook/useAnimatedValue.dart';
@@ -10,7 +11,6 @@ import 'preview.dart';
 import 'util/ext/hex_color.dart';
 import 'widget/preview_app.dart';
 import 'widget/scaled_with_bounds.dart';
-import 'widget/simple_icon_button.dart';
 
 abstract class PreviewProvider {
   String? get name => null;
@@ -180,28 +180,13 @@ class _PreviewProviderRenderer extends HookWidget {
             // watch out for IDEA controls there
             padding: const EdgeInsets.only(top: 32),
             child: Align(
-                alignment: Alignment.topLeft,
-                child: Column(
-                  children: [
-                    SimpleIconButton(
-                      color: iconColor,
-                      icon: Icons.change_circle_outlined,
-                      onClick: () => updateScale((it) => 1.0),
-                    ),
-                    SizedBox(height: 4),
-                    SimpleIconButton(
-                      color: iconColor,
-                      icon: Icons.add_circle_outline,
-                      onClick: () => updateScale((it) => it * 1.2),
-                    ),
-                    SizedBox(height: 4),
-                    SimpleIconButton(
-                      color: iconColor,
-                      icon: Icons.remove_circle_outline,
-                      onClick: () => updateScale((it) => it * 0.8),
-                    ),
-                  ],
-                )),
+              alignment: Alignment.topLeft,
+              child: ScaleController(
+                iconColor: iconColor,
+                scale: currentScale,
+                setScale: (newScale) => updateScale((it) => newScale),
+              ),
+            ),
           ),
         ),
       ],

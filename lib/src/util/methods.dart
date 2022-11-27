@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 Future<int> getUnusedPort(InternetAddress? address) {
   return ServerSocket.bind(address ?? InternetAddress.anyIPv4, 0)
@@ -7,4 +8,8 @@ Future<int> getUnusedPort(InternetAddress? address) {
     socket.close();
     return port;
   });
+}
+
+int clampInt(int x, int minValue, int maxValue) {
+  return min(maxValue, max(x, minValue));
 }
