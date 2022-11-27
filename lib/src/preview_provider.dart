@@ -1,16 +1,17 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:idea_widget_preview/src/util/ext/iterable_extension.dart';
-import 'package:idea_widget_preview/src/widget/scale_controller.dart';
 
 import 'api/generated/api.dart';
 import 'hook/useAnimatedValue.dart';
 import 'hook/useDebounce.dart';
 import 'preview.dart';
 import 'util/ext/hex_color.dart';
+import 'util/ext/iterable_extension.dart';
 import 'widget/preview_app.dart';
+import 'widget/scale_controller.dart';
 import 'widget/scaled_with_bounds.dart';
+import 'widget/simple_icon_button.dart';
 
 abstract class PreviewProvider {
   String? get name => null;
@@ -217,38 +218,57 @@ class _Preview extends HookWidget {
     final groupName = this.groupName;
     final subText = this.subText;
 
+    final renderIndex = useState(0);
+
+    void _reset() {
+      renderIndex.value += 1;
+    }
+
     return Column(
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            if (groupName != null)
-              Text(
-                groupName,
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                      fontSize: 8,
-                      color: textColor,
-                    ),
-                textAlign: TextAlign.left,
-              ),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                    fontSize: 12,
-                    color: textColor,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (groupName != null)
+                  Text(
+                    groupName,
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                          fontSize: 8,
+                          color: textColor,
+                        ),
+                    textAlign: TextAlign.left,
                   ),
-              textAlign: TextAlign.left,
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                        fontSize: 12,
+                        color: textColor,
+                      ),
+                  textAlign: TextAlign.left,
+                ),
+                if (subText != null)
+                  Text(
+                    subText,
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 7,
+                          color: textColor,
+                        ),
+                    textAlign: TextAlign.left,
+                  ),
+              ],
             ),
-            if (subText != null)
-              Text(
-                subText,
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 7,
-                      color: textColor,
-                    ),
-                textAlign: TextAlign.left,
-              ),
+            SizedBox(
+              width: 12,
+            ),
+            SimpleIconButton(
+              color: textColor,
+              icon: Icons.change_circle_outlined,
+              onClick: _reset,
+            )
           ],
         ),
         SizedBox(
@@ -267,7 +287,10 @@ class _Preview extends HookWidget {
                     // those should not be confused with random Scroll events.
                     return true;
                   },
-                  child: child,
+                  child: Container(
+                    key: Key('preview_render_$renderIndex'),
+                    child: child,
+                  ),
                 ),
               ),
             ],
