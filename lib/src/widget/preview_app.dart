@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 
 import '../api/generated/api.dart';
 import '../api/util.dart';
+import '../api/util_flutter.dart';
 import '../preview_provider.dart';
 import '../util/ext/hex_color.dart';
 
@@ -21,7 +22,28 @@ class PreviewApp extends StatelessWidget {
     required this.providers,
     required String paramsJson,
   })  : params = PreviewAppParams.fromJson(jsonDecode(paramsJson))!,
-        super(key: key);
+        super(key: key) {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    FlutterError.onError = (FlutterErrorDetails details) {
+      // this line prints the default flutter gesture caught exception in console
+      // but this won't be visible of course, when running with 'flutter run'
+      FlutterError.dumpErrorToConsole(details);
+
+      trySendError(
+        port: params.kotlinServerPort,
+        previewId: params.previewId,
+        error: details,
+      ).then((success) {
+        if (!success) {
+          print("Error while trying to send error");
+          print("----------------------");
+          print("Original error :  ${details.exception}");
+          print("StackTrace     :  ${details.stack}");
+        }
+      });
+    };
+  }
 
   @override
   Widget build(BuildContext context) {

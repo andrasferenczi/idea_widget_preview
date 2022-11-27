@@ -1,5 +1,6 @@
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
+import 'package:idea_widget_preview/src/example/start_app.dart';
 
 import '../preview.dart';
 import '../preview_provider.dart';
@@ -35,6 +36,7 @@ class _PreviewApp extends StatelessWidget {
         _DemoProvider(),
         _Multiple(),
         CreateMyCustomPreview().toPreviewProvider(CustomComponentPreview()),
+        StartAppPreview(),
       ],
     );
   }
@@ -85,7 +87,7 @@ class _Multiple extends PreviewProvider {
           builder: (context) => MyComponent(text: "First"),
         ),
         Preview(
-          title: 'Longer text',
+          title: 'Longer text to see what the title looks like',
           width: 100,
           builder: (context) => MyComponent(
               text:

@@ -204,6 +204,8 @@ class ApiClient {
           return GetClassnamesRequest.fromJson(value);
         case 'GetClassnamesResponse':
           return GetClassnamesResponse.fromJson(value);
+        case 'OnFlutterErrorRequest':
+          return OnFlutterErrorRequest.fromJson(value);
         case 'PreviewAppParams':
           return PreviewAppParams.fromJson(value);
         case 'PreviewClassDeclaration':

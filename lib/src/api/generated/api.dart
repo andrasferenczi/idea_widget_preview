@@ -36,6 +36,7 @@ part 'model/empty.dart';
 part 'model/flutter_preview_ready_request.dart';
 part 'model/get_classnames_request.dart';
 part 'model/get_classnames_response.dart';
+part 'model/on_flutter_error_request.dart';
 part 'model/preview_app_params.dart';
 part 'model/preview_class_declaration.dart';
 part 'model/preview_id.dart';

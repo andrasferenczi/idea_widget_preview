@@ -68,6 +68,58 @@ class KotlinApi {
     return null;
   }
 
+  /// Notify the Kotlin process about the error that happened in the Flutter process
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [OnFlutterErrorRequest] onFlutterErrorRequest (required):
+  Future<Response> kotlinOnFlutterErrorPostWithHttpInfo(OnFlutterErrorRequest onFlutterErrorRequest,) async {
+    // ignore: prefer_const_declarations
+    final path = r'/kotlin/on-flutter-error';
+
+    // ignore: prefer_final_locals
+    Object? postBody = onFlutterErrorRequest;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    const contentTypes = <String>['application/json'];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  /// Notify the Kotlin process about the error that happened in the Flutter process
+  ///
+  /// Parameters:
+  ///
+  /// * [OnFlutterErrorRequest] onFlutterErrorRequest (required):
+  Future<Empty?> kotlinOnFlutterErrorPost(OnFlutterErrorRequest onFlutterErrorRequest,) async {
+    final response = await kotlinOnFlutterErrorPostWithHttpInfo(onFlutterErrorRequest,);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Empty',) as Empty;
+    
+    }
+    return null;
+  }
+
   /// Dart client can register through this endpoint if it listens on a specific port
   ///
   /// Note: This method returns the HTTP [Response].
