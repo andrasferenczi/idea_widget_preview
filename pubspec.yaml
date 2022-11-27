@@ -1,6 +1,6 @@
 name: idea_widget_preview
 description: Widget Preview in IDEA-based development environments.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/andrasferenczi/idea_widget_preview
 
 environment:
