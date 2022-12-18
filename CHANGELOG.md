@@ -1,3 +1,7 @@
+## 0.0.4
+
+- Improved .pubignore
+
 ## 0.0.3
 
 - Added extra ID to API calls

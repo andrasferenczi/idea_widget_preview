@@ -1,2 +1,11 @@
+.dart_tool/
+.packages
+
+build/
+.idea
+preview.iml
+
 example
 plugin
+
+lib/widget.preview.dart
