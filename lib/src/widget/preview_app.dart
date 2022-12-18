@@ -31,6 +31,7 @@ class PreviewApp extends StatelessWidget {
       FlutterError.dumpErrorToConsole(details);
 
       trySendError(
+        clientId: params.clientId,
         port: params.kotlinServerPort,
         previewId: params.previewId,
         error: details,
@@ -100,6 +101,7 @@ class _LogicWrapper extends HookWidget {
       [kotlinServerPort],
     );
 
+    final clientId = params.clientId;
     final previewId = params.previewId;
 
     useEffect(() {
@@ -107,6 +109,10 @@ class _LogicWrapper extends HookWidget {
 
       api?.kotlinFlutterPreviewReadyPost(
         FlutterPreviewReadyRequest(
+          clientInfo: ClientInfo(
+            id: clientId,
+            type: ClientType.flutterPreview,
+          ),
           previewId: previewId,
         ),
       );
@@ -114,6 +120,7 @@ class _LogicWrapper extends HookWidget {
       return null;
     }, [
       api,
+      clientId,
       previewId,
     ]);
 
@@ -124,6 +131,10 @@ class _LogicWrapper extends HookWidget {
 
           api?.kotlinUpdateViewStatePost(
             UpdateViewStateRequest(
+              clientInfo: ClientInfo(
+                id: clientId,
+                type: ClientType.flutterPreview,
+              ),
               previewId: previewId,
               previewViewState: notification.viewState,
             ),

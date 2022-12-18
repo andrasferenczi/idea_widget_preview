@@ -4,9 +4,11 @@ import 'generated/api.dart';
 import 'util.dart';
 
 Future<bool> trySendError({
+  required String clientId,
   required int? port,
   required PreviewId previewId,
   required FlutterErrorDetails error,
+  ClientType type = ClientType.flutterPreview,
 }) async {
   if (port == null) {
     return false;
@@ -16,6 +18,10 @@ Future<bool> trySendError({
 
     await api.kotlinOnFlutterErrorPost(
       OnFlutterErrorRequest(
+        clientInfo: ClientInfo(
+          id: clientId,
+          type: type,
+        ),
         previewId: previewId,
         message: error.exceptionAsString(),
         stacktrace: error.stack?.toString(),

@@ -6,6 +6,10 @@ int getPluginServerPort() {
   return int.parse(Platform.environment["preview.plugin.port"]!);
 }
 
+String getClientId() {
+  return Platform.environment["preview.client.id"]!;
+}
+
 ClientType getClientType() {
   var typeRaw = Platform.environment["preview.client.type"]!;
   return ClientType.fromJson(typeRaw)!;

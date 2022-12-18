@@ -13,9 +13,12 @@ part of openapi.api;
 class UpdateViewStateRequest {
   /// Returns a new [UpdateViewStateRequest] instance.
   UpdateViewStateRequest({
+    required this.clientInfo,
     required this.previewId,
     required this.previewViewState,
   });
+
+  ClientInfo clientInfo;
 
   PreviewId previewId;
 
@@ -23,20 +26,23 @@ class UpdateViewStateRequest {
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is UpdateViewStateRequest &&
+     other.clientInfo == clientInfo &&
      other.previewId == previewId &&
      other.previewViewState == previewViewState;
 
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
+    (clientInfo.hashCode) +
     (previewId.hashCode) +
     (previewViewState.hashCode);
 
   @override
-  String toString() => 'UpdateViewStateRequest[previewId=$previewId, previewViewState=$previewViewState]';
+  String toString() => 'UpdateViewStateRequest[clientInfo=$clientInfo, previewId=$previewId, previewViewState=$previewViewState]';
 
   Map<String, dynamic> toJson() {
     final _json = <String, dynamic>{};
+      _json[r'client_info'] = clientInfo;
       _json[r'preview_id'] = previewId;
       _json[r'preview_view_state'] = previewViewState;
     return _json;
@@ -61,6 +67,7 @@ class UpdateViewStateRequest {
       }());
 
       return UpdateViewStateRequest(
+        clientInfo: ClientInfo.fromJson(json[r'client_info'])!,
         previewId: PreviewId.fromJson(json[r'preview_id'])!,
         previewViewState: PreviewViewState.fromJson(json[r'preview_view_state'])!,
       );
@@ -112,6 +119,7 @@ class UpdateViewStateRequest {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
+    'client_info',
     'preview_id',
     'preview_view_state',
   };

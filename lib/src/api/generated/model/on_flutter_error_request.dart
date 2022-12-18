@@ -13,11 +13,14 @@ part of openapi.api;
 class OnFlutterErrorRequest {
   /// Returns a new [OnFlutterErrorRequest] instance.
   OnFlutterErrorRequest({
+    required this.clientInfo,
     this.message,
     required this.previewId,
     this.stacktrace,
     this.type,
   });
+
+  ClientInfo clientInfo;
 
   ///
   /// Please note: This property should have been non-nullable! Since the specification file
@@ -47,6 +50,7 @@ class OnFlutterErrorRequest {
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is OnFlutterErrorRequest &&
+     other.clientInfo == clientInfo &&
      other.message == message &&
      other.previewId == previewId &&
      other.stacktrace == stacktrace &&
@@ -55,16 +59,18 @@ class OnFlutterErrorRequest {
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
+    (clientInfo.hashCode) +
     (message == null ? 0 : message!.hashCode) +
     (previewId.hashCode) +
     (stacktrace == null ? 0 : stacktrace!.hashCode) +
     (type == null ? 0 : type!.hashCode);
 
   @override
-  String toString() => 'OnFlutterErrorRequest[message=$message, previewId=$previewId, stacktrace=$stacktrace, type=$type]';
+  String toString() => 'OnFlutterErrorRequest[clientInfo=$clientInfo, message=$message, previewId=$previewId, stacktrace=$stacktrace, type=$type]';
 
   Map<String, dynamic> toJson() {
     final _json = <String, dynamic>{};
+      _json[r'client_info'] = clientInfo;
     if (message != null) {
       _json[r'message'] = message;
     } else {
@@ -103,6 +109,7 @@ class OnFlutterErrorRequest {
       }());
 
       return OnFlutterErrorRequest(
+        clientInfo: ClientInfo.fromJson(json[r'client_info'])!,
         message: mapValueOfType<String>(json, r'message'),
         previewId: PreviewId.fromJson(json[r'preview_id'])!,
         stacktrace: mapValueOfType<String>(json, r'stacktrace'),
@@ -156,6 +163,7 @@ class OnFlutterErrorRequest {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
+    'client_info',
     'preview_id',
   };
 }

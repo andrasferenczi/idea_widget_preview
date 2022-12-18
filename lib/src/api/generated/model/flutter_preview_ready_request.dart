@@ -13,25 +13,31 @@ part of openapi.api;
 class FlutterPreviewReadyRequest {
   /// Returns a new [FlutterPreviewReadyRequest] instance.
   FlutterPreviewReadyRequest({
+    required this.clientInfo,
     required this.previewId,
   });
+
+  ClientInfo clientInfo;
 
   PreviewId previewId;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is FlutterPreviewReadyRequest &&
+     other.clientInfo == clientInfo &&
      other.previewId == previewId;
 
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
+    (clientInfo.hashCode) +
     (previewId.hashCode);
 
   @override
-  String toString() => 'FlutterPreviewReadyRequest[previewId=$previewId]';
+  String toString() => 'FlutterPreviewReadyRequest[clientInfo=$clientInfo, previewId=$previewId]';
 
   Map<String, dynamic> toJson() {
     final _json = <String, dynamic>{};
+      _json[r'client_info'] = clientInfo;
       _json[r'preview_id'] = previewId;
     return _json;
   }
@@ -55,6 +61,7 @@ class FlutterPreviewReadyRequest {
       }());
 
       return FlutterPreviewReadyRequest(
+        clientInfo: ClientInfo.fromJson(json[r'client_info'])!,
         previewId: PreviewId.fromJson(json[r'preview_id'])!,
       );
     }
@@ -105,6 +112,7 @@ class FlutterPreviewReadyRequest {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
+    'client_info',
     'preview_id',
   };
 }

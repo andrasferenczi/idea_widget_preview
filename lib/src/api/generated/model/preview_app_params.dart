@@ -13,12 +13,16 @@ part of openapi.api;
 class PreviewAppParams {
   /// Returns a new [PreviewAppParams] instance.
   PreviewAppParams({
+    required this.clientId,
     required this.initialViewState,
     this.kotlinServerPort,
     required this.previewId,
     required this.previewedFilePath,
     required this.theme,
   });
+
+  /// The id used to identify the process (among modules).  Technically, preview_id identifies it, but it is more consistent to name it. 
+  String clientId;
 
   PreviewViewState initialViewState;
 
@@ -40,6 +44,7 @@ class PreviewAppParams {
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is PreviewAppParams &&
+     other.clientId == clientId &&
      other.initialViewState == initialViewState &&
      other.kotlinServerPort == kotlinServerPort &&
      other.previewId == previewId &&
@@ -49,6 +54,7 @@ class PreviewAppParams {
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
+    (clientId.hashCode) +
     (initialViewState.hashCode) +
     (kotlinServerPort == null ? 0 : kotlinServerPort!.hashCode) +
     (previewId.hashCode) +
@@ -56,10 +62,11 @@ class PreviewAppParams {
     (theme.hashCode);
 
   @override
-  String toString() => 'PreviewAppParams[initialViewState=$initialViewState, kotlinServerPort=$kotlinServerPort, previewId=$previewId, previewedFilePath=$previewedFilePath, theme=$theme]';
+  String toString() => 'PreviewAppParams[clientId=$clientId, initialViewState=$initialViewState, kotlinServerPort=$kotlinServerPort, previewId=$previewId, previewedFilePath=$previewedFilePath, theme=$theme]';
 
   Map<String, dynamic> toJson() {
     final _json = <String, dynamic>{};
+      _json[r'client_id'] = clientId;
       _json[r'initial_view_state'] = initialViewState;
     if (kotlinServerPort != null) {
       _json[r'kotlin_server_port'] = kotlinServerPort;
@@ -91,6 +98,7 @@ class PreviewAppParams {
       }());
 
       return PreviewAppParams(
+        clientId: mapValueOfType<String>(json, r'client_id')!,
         initialViewState: PreviewViewState.fromJson(json[r'initial_view_state'])!,
         kotlinServerPort: mapValueOfType<int>(json, r'kotlin_server_port'),
         previewId: PreviewId.fromJson(json[r'preview_id'])!,
@@ -145,6 +153,7 @@ class PreviewAppParams {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
+    'client_id',
     'initial_view_state',
     'preview_id',
     'previewed_file_path',

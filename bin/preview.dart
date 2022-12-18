@@ -9,10 +9,12 @@ import 'package:idea_widget_preview/src/util/methods.dart';
 void main(List<String> arguments) async {
   final pluginServerPort = getPluginServerPort();
   final clientType = getClientType();
+  final clientId = getClientId();
 
   print("===");
   print('Kotlin server port: $pluginServerPort');
   print('Client Type: $clientType');
+  print('Client Id: $clientId');
   print("===");
 
   //
@@ -35,17 +37,18 @@ void main(List<String> arguments) async {
   try {
     await api.kotlinRegisterClientPost(
       RegisterClientRequest(
+        clientInfo: ClientInfo(
+          id: clientId,
+          type: ClientType.analysisServer,
+        ),
         port: serverPort,
-        clientType: ClientType.analysisServer,
       ),
     );
   } catch (e) {
     print(e);
   }
 
-  // this one should be the last call, because it is blocking
   ProcessSignal.sigint.watch().listen((_) async {
-    print('onClose');
     // using without explicitly declaring the type of server,
     // because it is not exported
     server.dispose();

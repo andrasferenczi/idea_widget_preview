@@ -192,6 +192,8 @@ class ApiClient {
           return valueString == 'true' || valueString == '1';
         case 'DateTime':
           return value is DateTime ? value : DateTime.tryParse(value);
+        case 'ClientInfo':
+          return ClientInfo.fromJson(value);
         case 'ClientType':
           return ClientTypeTypeTransformer().decode(value);
         case 'DartExtendedType':

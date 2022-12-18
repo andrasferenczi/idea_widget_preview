@@ -13,33 +13,33 @@ part of openapi.api;
 class RegisterClientRequest {
   /// Returns a new [RegisterClientRequest] instance.
   RegisterClientRequest({
+    required this.clientInfo,
     required this.port,
-    required this.clientType,
   });
+
+  ClientInfo clientInfo;
 
   /// The port of the server the client is listening on
   int port;
 
-  ClientType clientType;
-
   @override
   bool operator ==(Object other) => identical(this, other) || other is RegisterClientRequest &&
-     other.port == port &&
-     other.clientType == clientType;
+     other.clientInfo == clientInfo &&
+     other.port == port;
 
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
-    (port.hashCode) +
-    (clientType.hashCode);
+    (clientInfo.hashCode) +
+    (port.hashCode);
 
   @override
-  String toString() => 'RegisterClientRequest[port=$port, clientType=$clientType]';
+  String toString() => 'RegisterClientRequest[clientInfo=$clientInfo, port=$port]';
 
   Map<String, dynamic> toJson() {
     final _json = <String, dynamic>{};
+      _json[r'client_info'] = clientInfo;
       _json[r'port'] = port;
-      _json[r'client_type'] = clientType;
     return _json;
   }
 
@@ -62,8 +62,8 @@ class RegisterClientRequest {
       }());
 
       return RegisterClientRequest(
+        clientInfo: ClientInfo.fromJson(json[r'client_info'])!,
         port: mapValueOfType<int>(json, r'port')!,
-        clientType: ClientType.fromJson(json[r'client_type'])!,
       );
     }
     return null;
@@ -113,8 +113,8 @@ class RegisterClientRequest {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
+    'client_info',
     'port',
-    'client_type',
   };
 }
 

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:idea_widget_preview/src/util/disposable.dart';
 import 'package:shelf/shelf.dart';
@@ -6,6 +7,12 @@ import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'package:shelf_router/shelf_router.dart';
 
 import '../generated/api.dart';
+
+class _Wrapper<T> {
+  T value;
+
+  _Wrapper(this.value);
+}
 
 Future<Disposable> startServer({
   required int port,
@@ -15,6 +22,8 @@ Future<Disposable> startServer({
   var router = Router();
 
   const Map<String, String> headers = {'Content-Type': 'application/json'};
+
+  final disposableReference = _Wrapper<Disposable?>(null);
 
   router.post('/dart/get-classnames', (Request request) async {
     final requestBody = await request.readAsString();
@@ -35,15 +44,40 @@ Future<Disposable> startServer({
     );
   });
 
-  var handler =
+  // See API doc comments on this endpoint.
+  // Basically, this is the only semi-reliable way to close the server.
+  router.post('/dart/shutdown', (Request request) async {
+    print("-> stop");
+
+    disposableReference.value?.dispose();
+
+    final responseJson = {"ok": "true"};
+    final responseBody = jsonEncode(responseJson);
+
+    print("<- stop | $responseBody");
+    return Response.ok(
+      responseBody,
+      headers: headers,
+    );
+  });
+
+  final handler =
       const Pipeline().addMiddleware(logRequests()).addHandler(router);
 
-  var server = await shelf_io.serve(handler, 'localhost', port);
+  final server = await shelf_io.serve(handler, 'localhost', port);
 
   print('Serving at http://${server.address.host}:${server.port}');
 
-  return Disposable.create(() {
+  final disposable = Disposable.create(() async {
+    print("Disposing server");
     // because server itself cannot be returned (type not exported)
-    server.close(force: true);
+    await server.close(force: true);
+    // For some reason server process does not close,
+    // if there is no exit(0) in here. A 'dart' process would remain.
+    exit(0);
   });
+
+  disposableReference.value = disposable;
+
+  return disposable;
 }

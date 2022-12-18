@@ -239,14 +239,14 @@ class MealsViewStory extends StatelessWidget implements StoryProvider {
   @override
   final List<Story> stories = [
     Story(
-      name: 'Widget/Breakfast',
+      name: 'Widget/Breakfast StoryProvider',
       description: 'A preview about the breakfast.',
       builder: (context) => MealsView(
         mealsListData: MealsListData.tabIconsList[0],
       ),
     ),
     Story(
-      name: 'Widget/Lunch',
+      name: 'Widget/Lunch StoryProvider',
       description: 'A preview about the lunch.',
       builder: (context) => MealsView(
         mealsListData: MealsListData.tabIconsList[1],

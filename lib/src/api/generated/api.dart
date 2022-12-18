@@ -30,6 +30,7 @@ part 'auth/http_bearer_auth.dart';
 part 'api/dart_api.dart';
 part 'api/kotlin_api.dart';
 
+part 'model/client_info.dart';
 part 'model/client_type.dart';
 part 'model/dart_extended_type.dart';
 part 'model/empty.dart';

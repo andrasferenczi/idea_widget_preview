@@ -63,7 +63,7 @@ packages:
       name: convert
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.2"
+    version: "3.1.0"
   crypto:
     dependency: transitive
     description:
@@ -129,14 +129,14 @@ packages:
       name: freezed_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.2.0"
   glob:
     dependency: transitive
     description:
       name: glob
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   http:
     dependency: transitive
     description:
@@ -157,11 +157,11 @@ packages:
       name: http_parser
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.1"
+    version: "4.0.2"
   idea_widget_preview:
     dependency: "direct main"
     description:
-      path: ".."
+      path: "../.."
       relative: true
     source: path
     version: "0.0.3"
@@ -178,21 +178,14 @@ packages:
       name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.6.0"
+    version: "4.7.0"
   lints:
     dependency: transitive
     description:
       name: lints
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
-  logic:
-    dependency: "direct main"
-    description:
-      path: logic
-      relative: true
-    source: path
-    version: "0.0.1"
+    version: "2.0.1"
   matcher:
     dependency: transitive
     description:
@@ -214,13 +207,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   package_config:
     dependency: transitive
     description:
@@ -235,34 +221,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.1"
-  provider:
-    dependency: transitive
-    description:
-      name: provider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.0.3"
   pub_semver:
     dependency: transitive
     description:
       name: pub_semver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
-  recase:
-    dependency: transitive
-    description:
-      name: recase
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.0"
+    version: "2.1.3"
   shelf:
     dependency: transitive
     description:
       name: shelf
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.3.2"
+    version: "1.4.0"
   shelf_router:
     dependency: transitive
     description:
@@ -289,13 +261,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0"
-  storybook_flutter:
-    dependency: "direct main"
-    description:
-      name: storybook_flutter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.11.2"
   stream_channel:
     dependency: transitive
     description:
@@ -331,13 +296,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.1"
-  uiexample:
-    dependency: "direct main"
-    description:
-      path: uiexample
-      relative: true
-    source: path
-    version: "1.0.0+1"
   vector_math:
     dependency: transitive
     description:
@@ -351,7 +309,7 @@ packages:
       name: watcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   yaml:
     dependency: transitive
     description:
