@@ -1,3 +1,9 @@
+> # Deprecated
+>
+> Plugin is discontinued. It is disabled in the Jetbrains Marketplace.
+>
+> ---
+
 # About
 
 The aim of this plugin (pub package and IDE plugin) is to assist Flutter developers creating reusable UI components that are not tied to business logic.
